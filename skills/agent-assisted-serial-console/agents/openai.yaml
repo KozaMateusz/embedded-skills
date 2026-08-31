@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agent-Assisted Serial Console"
+  short_description: "Share a serial console between user and agent"
+  default_prompt: "Use $agent-assisted-serial-console to give both me and the agent safe access to one serial console."
