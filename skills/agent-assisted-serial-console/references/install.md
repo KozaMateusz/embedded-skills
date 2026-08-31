@@ -9,13 +9,14 @@ Verify that the `openbaud:openbaud` skill and `mcp__openbaud__*` tools are
 already available. If not, install from the official marketplace:
 
 ```bash
-codex plugin marketplace add Leonezz/openbaud
+codex plugin marketplace add Leonezz/openbaud --ref v0.1.5
 codex plugin add openbaud@openbaud-marketplace
 ```
 
-For a reproducible release, add `--ref <release-tag>` to the marketplace-add
-command. Do not guess a current tag; look it up or use a tag supplied by the
-user.
+This skill pins OpenBaud `v0.1.5`, whose release provides runtimes for Linux
+x86-64 and ARM64, macOS Intel and Apple Silicon, and Windows x86-64. Do not
+change or remove the pin without verifying the replacement release's platform
+assets.
 
 Start a new Codex task from the project directory after plugin installation.
 Verify installation by loading the OpenBaud skill and calling `list_ports`.
