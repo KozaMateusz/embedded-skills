@@ -94,6 +94,29 @@ Alternatives include `picocom --baud 921600 /tmp/openbaud-user` and
 `screen /tmp/openbaud-user 921600`. Baud on a PTY is not electrically
 significant, but passing the physical baud keeps the configuration legible.
 
+### Automatic terminal launch
+
+When the user explicitly asks the agent to open the terminal, do so after the
+router endpoints and OpenBaud session have been verified. First check whether
+the user PTY already has a terminal client. Do not start another reader on the
+same PTY; report and reuse the existing connection instead.
+
+Choose an installed terminal emulator and launch `tio` on the user endpoint,
+never on the physical device. Common command shapes are:
+
+```bash
+alacritty --title 'Shared serial console' -e tio -b 921600 /tmp/openbaud-user
+foot --title='Shared serial console' tio -b 921600 /tmp/openbaud-user
+kitty --title 'Shared serial console' tio -b 921600 /tmp/openbaud-user
+```
+
+Use the confirmed baud in place of `921600`. A GUI launch may require host
+approval; request it immediately before launching when required. Keep the
+terminal process alive, verify that it did not exit immediately, and tell the
+user that closing its window stops only their terminal client, not the router or
+OpenBaud capture. Remind them that writes from the agent and human terminal can
+interleave.
+
 ## 5. Verify routing
 
 Prefer passive device output. If the device is a confirmed shell console, a

@@ -44,6 +44,11 @@ persisting, or troubleshooting the shared topology.
 - After creating or recreating the endpoints, always print the exact terminal
   command the user can run to connect to `/tmp/openbaud-user`, including the
   confirmed baud rate.
+- When the user asks the agent to open the serial terminal, verify that the user
+  PTY exists and is not already being consumed by another terminal, then launch
+  an installed terminal emulator with `tio` attached to `/tmp/openbaud-user`.
+  Never point the terminal emulator at the physical TTY. Treat the GUI launch as
+  a host action and request approval when the environment requires it.
 - Explain the expected effect before sending bytes. Do not use an unknown frame
   as a connectivity test; prefer passive reads or a harmless documented command.
 - Two virtual clients can transmit concurrently, so coordinate writers. The
@@ -60,8 +65,10 @@ Confirm all of the following:
 3. Both virtual TTY paths exist and resolve to distinct PTYs.
 4. OpenBaud opens only its PTY and starts a capture for continued exploration.
 5. The user can open the other PTY with `tio`, `picocom`, or an equivalent
-   terminal.
+   terminal; when they requested automatic launch, the terminal is running on
+   the user PTY.
 6. A passive device message or harmless documented command reaches both sides.
 
 Report the physical path, both virtual paths, baud rate, OpenBaud session ID,
-router lifecycle, and the exact user terminal command.
+router lifecycle, exact user terminal command, and whether an automatic
+terminal launch is active.
