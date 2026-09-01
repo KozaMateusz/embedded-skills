@@ -31,6 +31,11 @@ Explain before doing this that inserting a broker requires a brief disconnect.
 
 ## 3. Start vsp-router
 
+Unless the user explicitly requests other endpoint paths, always use
+`/tmp/openbaud-agent` for OpenBaud and `/tmp/openbaud-user` for the human
+operator. Keep these names unchanged across router restarts and physical-device
+re-enumeration so clients have stable connection paths.
+
 For an initial foreground setup, use explicit virtual paths and the confirmed
 physical path and baud. Example:
 
@@ -77,7 +82,9 @@ open(port=/tmp/openbaud-agent, baud=921600, data_bits=8,
 
 Start an OpenBaud capture on the new session before extended exploration.
 
-Give the user one installed terminal command, for example:
+After creating or recreating the endpoints, always print the exact installed
+terminal command the user can run, including the confirmed baud rate. For
+example:
 
 ```bash
 tio -b 921600 /tmp/openbaud-user

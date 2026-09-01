@@ -38,6 +38,12 @@ persisting, or troubleshooting the shared topology.
   physical-port session. Explain that this causes one brief disconnect.
 - After routing, use OpenBaud only through its dedicated PTY. Do not replace its
   audited device operations with shell writes.
+- Unless the user explicitly requests different paths, always name the shared
+  endpoints `/tmp/openbaud-agent` and `/tmp/openbaud-user`. Reuse those exact
+  names when restarting the router or reconnecting a re-enumerated device.
+- After creating or recreating the endpoints, always print the exact terminal
+  command the user can run to connect to `/tmp/openbaud-user`, including the
+  confirmed baud rate.
 - Explain the expected effect before sending bytes. Do not use an unknown frame
   as a connectivity test; prefer passive reads or a harmless documented command.
 - Two virtual clients can transmit concurrently, so coordinate writers. The
