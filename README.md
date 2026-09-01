@@ -6,5 +6,5 @@ Codex skills for working with embedded devices and hardware interfaces.
 
 ```text
 Use $skill-installer to install <skill-name> from
-https://github.com/KozaMateusz/embedded-skills/tree/main/skills/<skill-name>
+https://github.com/KozaMateusz/embedded-skills
 ```
